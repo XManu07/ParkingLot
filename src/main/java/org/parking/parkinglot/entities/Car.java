@@ -3,15 +3,16 @@ package org.parking.parkinglot.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "cars")
+@Table(name = "car")
 public class Car {
-    @Column(name = "parking_spot")
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
     private String parkingSpot;
 
-    @Column(name = "license_plate")
-    private String licensePlate;
-
-    private Long id;
+    private String licensePlace;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "owner_id", nullable = false)
@@ -33,12 +34,12 @@ public class Car {
         this.parkingSpot = parkingSpot;
     }
 
-    public String getLicensePlate() {
-        return licensePlate;
+    public String getLicensePlace() {
+        return licensePlace;
     }
 
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
+    public void setLicensePlace(String licensePlace) {
+        this.licensePlace = licensePlace;
     }
 
     public Long getId() {
@@ -48,4 +49,5 @@ public class Car {
     public void setId(Long id) {
         this.id = id;
     }
+
 }
