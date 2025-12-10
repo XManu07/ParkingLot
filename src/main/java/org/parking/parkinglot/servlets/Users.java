@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.parking.parkinglot.common.UserDto;
-import org.parking.parkinglot.ejb.UserBean;
+import org.parking.parkinglot.ejb.UsersBean;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,12 +16,12 @@ import java.util.List;
 public class Users extends HttpServlet {
 
     @Inject
-    UserBean userBean;
+    UsersBean usersBean;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse
             response) throws ServletException, IOException {
-        List<UserDto> users = userBean.findAllUsers();
+        List<UserDto> users = usersBean.findAllUsers();
         request.setAttribute("users", users);
         request.setAttribute("activePage", "Users");
         request.getRequestDispatcher("/WEB-INF/pages/users.jsp").forward(request,response);

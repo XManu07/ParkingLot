@@ -32,5 +32,11 @@
         </div>
         <hr class="mb-4">
         <input type="hidden" name="car_id" value="${car.id}" />
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Update Car</button>
+            </div>
+        </div>
     </form>
+
 </t:pageTemplate>

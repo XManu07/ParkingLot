@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Stateless
-public class UserBean {
-    private static final Logger LOG = Logger.getLogger(UserBean.class.getName());
+public class UsersBean {
+    private static final Logger LOG = Logger.getLogger(UsersBean.class.getName());
 
     @PersistenceContext
     EntityManager entityManager;

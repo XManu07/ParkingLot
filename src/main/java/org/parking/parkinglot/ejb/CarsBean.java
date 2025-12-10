@@ -9,6 +9,7 @@ import org.parking.parkinglot.entities.Car;
 import org.parking.parkinglot.entities.User;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -41,7 +42,7 @@ public class CarsBean {
 
     public CarDto findById(Long carId) {
         LOG.info("findCarById");
-        CarDto  carDto = null;
+        CarDto carDto = null;
         TypedQuery<Car> typedQuery = entityManager.createQuery("SELECT c FROM Car c", Car.class);
         List<Car> cars = typedQuery.getResultList();
         for (Car car : cars) {
@@ -66,5 +67,29 @@ public class CarsBean {
         entityManager.persist(car);
     }
 
+    public void updateCar(Long carId, String licensePlate, String parkingSpot, Long userId) {
+        LOG.info("updateCar");
 
+        Car car = entityManager.find(Car.class, carId);
+        car.setLicensePlate(licensePlate);
+        car.setParkingSpot(parkingSpot);
+
+        // remove car from old owner
+        User oldUser = car.getOwner();
+        oldUser.getCars().remove(car);
+
+        // add car to new owner
+        User user = entityManager.find(User.class, userId);
+        user.getCars().add(car);
+        car.setOwner(user);
+    }
+
+    public void deleteCarsByIds(Collection<Long> carIds) {
+        LOG.info("deleteCarsByIds");
+
+        for (Long carId : carIds) {
+            Car car = entityManager.find(Car.class, carId);
+            entityManager.remove(car);
+        }
+    }
 }

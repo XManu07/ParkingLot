@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.parking.parkinglot.common.UserDto;
 import org.parking.parkinglot.ejb.CarsBean;
-import org.parking.parkinglot.ejb.UserBean;
+import org.parking.parkinglot.ejb.UsersBean;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,14 +17,14 @@ import java.util.List;
 public class AddCar extends HttpServlet {
 
     @Inject
-    UserBean userBean;
+    UsersBean usersBean;
 
     @Inject
     CarsBean carsBean;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<UserDto> users = userBean.findAllUsers();
+        List<UserDto> users = usersBean.findAllUsers();
         request.setAttribute("users", users);
         request.getRequestDispatcher("/WEB-INF/pages/addCar.jsp").forward(request, response);
     }
