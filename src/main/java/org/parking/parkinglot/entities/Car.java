@@ -10,21 +10,17 @@ public class Car {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     private String parkingSpot;
 
     private String licensePlate;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "owner_id", nullable = false)
-    private User owner;
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
 
     public String getParkingSpot() {
         return parkingSpot;
@@ -42,12 +38,15 @@ public class Car {
         this.licensePlate = licensePlate;
     }
 
-    public Long getId() {
-        return id;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User owner;
+
+    public User getOwner() {
+        return owner;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
-
 }

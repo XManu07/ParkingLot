@@ -21,6 +21,7 @@ public class User {
         this.id = id;
     }
 
+    @Column(name = "password")
     private String password;
 
     @Column(name = "email")
@@ -62,5 +63,16 @@ public class User {
 
     public void setCars(List<Car> cars) {
         this.cars = cars;
+    }
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<UserGroup> usergroups = new ArrayList<>();
+
+    public List<UserGroup> getUsergroups() {
+        return usergroups;
+    }
+
+    public void setUsergroups(List<UserGroup> usergroups) {
+        this.usergroups = usergroups;
     }
 }
