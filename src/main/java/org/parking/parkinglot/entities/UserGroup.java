@@ -30,7 +30,7 @@ public class UserGroup {
     }
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="username", nullable = false)
+    @JoinColumn(name="username", nullable = false, referencedColumnName="username")
     private User user;
 
     public User getUser() {
